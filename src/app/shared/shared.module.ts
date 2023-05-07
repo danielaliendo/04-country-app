@@ -22,7 +22,8 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
   exports: [
     AboutPageComponent,
     HomePageComponent,
-    SidebarComponent
+    SidebarComponent,
+    ContactPageComponent
   ]
 })
 export class SharedModule { }
