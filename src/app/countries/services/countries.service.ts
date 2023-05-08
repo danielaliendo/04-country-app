@@ -5,13 +5,13 @@ import { Country } from '../interfaces/country';
 
 @Injectable({ providedIn: 'root' })
 
-export class ServiceNameService {
+export class CountriesService {
 
   private API_URL: string = 'https://restcountries.com/v3.1'
 
   constructor(private http: HttpClient) { }
 
-  searchCapital(term: string): Observable<Country[]> {
+  searchByCapital(term: string): Observable<Country[]> {
     return this.http.get<Country[]>(`${this.API_URL}/capital/${term}`)
   }
 
