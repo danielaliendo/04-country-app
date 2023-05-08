@@ -1,1 +1,7 @@
-<p>search-box works!</p>
+<input
+  class="form-control"
+  #txtSearchBoxValue
+  [type]="type"
+  [placeholder]="placeholder"
+  (keyup.enter)="emitValue(txtSearchBoxValue.value)"
+ >
