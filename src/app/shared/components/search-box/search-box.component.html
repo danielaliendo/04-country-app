@@ -4,4 +4,5 @@
   [type]="type"
   [placeholder]="placeholder"
   (keyup.enter)="emitValue(txtSearchBoxValue.value)"
+  (keyup)="onKeyPress(txtSearchBoxValue.value)"
  >
