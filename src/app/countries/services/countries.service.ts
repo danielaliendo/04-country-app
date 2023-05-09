@@ -19,7 +19,18 @@ export class CountriesService {
     byRegion: { term: 'Africa', countries: [] },
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.loadFromLocalStorage();
+  }
+
+  private saveToLocalStorage () {
+      localStorage.setItem('cacheStore', JSON.stringify(this.cacheStore))
+  }
+
+  private loadFromLocalStorage () {
+    if (!localStorage.getItem('cacheStore')) return;
+    this.cacheStore = JSON.parse(localStorage.getItem('cacheStore') || JSON.stringify(this.cacheStore))
+  }
 
   searchCountryByAlphaCode(code: string): Observable<Country | null> {
     this.url = `${this.API_URL}/alpha/${code}`
@@ -37,7 +48,8 @@ export class CountriesService {
         tap((countries) => this.cacheStore.byCapital = {
           term,
           countries
-        })
+        }),
+        tap(() => this.saveToLocalStorage())
       )
   }
 
@@ -48,7 +60,8 @@ export class CountriesService {
       tap((countries) => this.cacheStore.byCountries = {
         term,
         countries
-      })
+      }),
+      tap(() => this.saveToLocalStorage())
     )
   }
 
@@ -59,7 +72,8 @@ export class CountriesService {
       tap((countries) => this.cacheStore.byRegion = {
         term: region,
         countries
-      })
+      }),
+      tap(() => this.saveToLocalStorage())
     )
   }
 
